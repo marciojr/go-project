@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	controller "github.com/marciojr/go-project/src/controller/userHandlers"
+	controller "github.com/marciojr/go-project/src/controller/handlers"
 )
 
 func InitRoutes(r *gin.RouterGroup) {
