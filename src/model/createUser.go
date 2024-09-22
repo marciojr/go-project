@@ -6,7 +6,7 @@ import (
 	"github.com/marciojr/go-project/src/configuration/rest_err"
 )
 
-func (ud *UserDomain) CreateUser() *rest_err.RestErr {
+func (ud *userDomain) CreateUser() *rest_err.RestErr {
 
 	ud.EncryptPassword()
 
