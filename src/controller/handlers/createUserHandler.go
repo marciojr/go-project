@@ -8,6 +8,7 @@ import (
 	"github.com/marciojr/go-project/src/controller/model/request"
 	"github.com/marciojr/go-project/src/controller/model/response"
 	"github.com/marciojr/go-project/src/model"
+	"github.com/marciojr/go-project/src/model/service"
 )
 
 var (
@@ -32,7 +33,9 @@ func CreateUser(c *gin.Context) {
 		userRequest.Age,
 	)
 
-	if err := domain.CreateUser(); err != nil {
+	service := service.NewUserDomainService()
+
+	if err := service.CreateUser(domain); err != nil {
 		c.JSON(err.Code, err)
 		return
 	}

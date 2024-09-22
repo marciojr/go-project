@@ -3,9 +3,16 @@ package model
 import (
 	"crypto/md5"
 	"encoding/hex"
-
-	"github.com/marciojr/go-project/src/configuration/rest_err"
 )
+
+type UserDomainInterface interface {
+	GetEmail() string
+	GetPassword() string
+	GetName() string
+	GetAge() int8
+
+	EncryptPassword()
+}
 
 type userDomain struct {
 	email    string
@@ -14,11 +21,20 @@ type userDomain struct {
 	age      int8
 }
 
-type UserDomainInterface interface {
-	CreateUser() *rest_err.RestErr
-	UpdateUser(string) *rest_err.RestErr
-	FindUser(string) (*userDomain, *rest_err.RestErr)
-	DeleteUser(string) *rest_err.RestErr
+func (ud *userDomain) GetEmail() string {
+	return ud.email
+}
+
+func (ud *userDomain) GetPassword() string {
+	return ud.password
+}
+
+func (ud *userDomain) GetName() string {
+	return ud.name
+}
+
+func (ud *userDomain) GetAge() int8 {
+	return ud.age
 }
 
 func NewUserDomain(email, password, name string,
