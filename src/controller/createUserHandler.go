@@ -6,16 +6,12 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/marciojr/go-project/src/configuration/validation"
 	"github.com/marciojr/go-project/src/controller/model/request"
-	"github.com/marciojr/go-project/src/controller/model/response"
 	"github.com/marciojr/go-project/src/model"
 	"github.com/marciojr/go-project/src/model/service"
+	"github.com/marciojr/go-project/src/view"
 )
 
-var (
-	UserDomainInterface model.UserDomainInterface
-)
-
-func CreateUser(c *gin.Context) {
+func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 
 	var userRequest request.UserRequest
 
@@ -40,12 +36,5 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 
-	response := response.UserResponse{
-		ID:    "1",
-		Email: userRequest.Email,
-		Name:  userRequest.Name,
-		Age:   userRequest.Age,
-	}
-
-	c.JSON(http.StatusOK, response)
+	c.JSON(http.StatusOK, view.ConvertDomainToResponse(domain))
 }
