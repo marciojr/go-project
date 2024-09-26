@@ -1,8 +1,6 @@
 package service
 
 import (
-	"fmt"
-
 	"github.com/marciojr/go-project/src/configuration/rest_err"
 	"github.com/marciojr/go-project/src/model"
 )
@@ -16,6 +14,5 @@ func (ud *userDomainService) CreateUser(userDomain model.UserDomainInterface) (m
 		return nil, err
 	}
 
-	fmt.Println(userDomain.GetPassword())
 	return userDomainRepository, nil
 }
