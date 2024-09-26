@@ -7,10 +7,15 @@ import (
 	"github.com/marciojr/go-project/src/model"
 )
 
-func (uc *userDomainService) CreateUser(userDomain model.UserDomainInterface) *rest_err.RestErr {
+func (ud *userDomainService) CreateUser(userDomain model.UserDomainInterface) (model.UserDomainInterface, *rest_err.RestErr) {
 
 	userDomain.EncryptPassword()
 
+	userDomainRepository, err := ud.userRepository.CreateUser(userDomain)
+	if err != nil {
+		return nil, err
+	}
+
 	fmt.Println(userDomain.GetPassword())
-	return nil
+	return userDomainRepository, nil
 }

@@ -7,9 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/marciojr/go-project/src/configuration/database/mongodb"
-	"github.com/marciojr/go-project/src/controller"
 	"github.com/marciojr/go-project/src/controller/routes"
-	"github.com/marciojr/go-project/src/model/service"
 )
 
 func main() {
@@ -21,12 +19,12 @@ func main() {
 
 	ctx := context.Background()
 
-	if _, err := mongodb.NewMongoDbConnection(ctx); err != nil {
+	database, err := mongodb.NewMongoDbConnection(ctx)
+	if err != nil {
 		log.Fatal(err)
 	}
 
-	service := service.NewUserDomainService()
-	userController := controller.NewUserControllerInterface(service)
+	userController := initDependencies(database)
 
 	router := gin.Default()
 

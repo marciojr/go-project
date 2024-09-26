@@ -18,10 +18,10 @@ type UserDomainInterface interface {
 func NewUserDomain(email, password, name string,
 	age int8) UserDomainInterface {
 	return &userDomain{
-		Email:    email,
-		Password: password,
-		Name:     name,
-		Age:      age,
+		email:    email,
+		password: password,
+		name:     name,
+		age:      age,
 	}
 }
 
