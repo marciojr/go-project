@@ -25,6 +25,7 @@ type UserRepository interface {
 	FindUserByEmail(
 		ID string,
 	) (model.UserDomainInterface, *rest_err.RestErr)
+	DeleteUser(string) *rest_err.RestErr
 }
 
 func NewUserRepository(
