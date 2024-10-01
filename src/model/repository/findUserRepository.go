@@ -21,7 +21,7 @@ func (ur *userRepository) FindAllUsers() ([]model.UserDomainInterface, *rest_err
 	usersEntity := []model.UserDomainInterface{}
 
 	cursor, err := collection.Find(context.Background(), bson.D{})
-	println("Errrrrorrrr", err)
+
 	if err != nil {
 		return nil, rest_err.NewInternalServerError(err.Error())
 	}
@@ -34,7 +34,7 @@ func (ur *userRepository) FindAllUsers() ([]model.UserDomainInterface, *rest_err
 		}
 		usersEntity = append(usersEntity, converter.ConvertEntityToDomain(entity))
 	}
-	println("Errrrrorrrr")
+
 	return usersEntity, nil
 }
 
