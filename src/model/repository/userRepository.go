@@ -18,6 +18,7 @@ type UserRepository interface {
 	CreateUser(
 		userDomain model.UserDomainInterface,
 	) (model.UserDomainInterface, *rest_err.RestErr)
+	FindAllUsers() ([]model.UserDomainInterface, *rest_err.RestErr)
 	FindUserById(
 		ID string,
 	) (model.UserDomainInterface, *rest_err.RestErr)

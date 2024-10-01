@@ -5,6 +5,16 @@ import (
 	"github.com/marciojr/go-project/src/model"
 )
 
+func (ud *userDomainService) FindAllUsers() ([]model.UserDomainInterface, *rest_err.RestErr) {
+
+	users, err := ud.userRepository.FindAllUsers()
+
+	if err != nil {
+		return nil, err
+	}
+	return users, nil
+}
+
 func (ud *userDomainService) FindUserById(ID string) (model.UserDomainInterface, *rest_err.RestErr) {
 
 	user, err := ud.userRepository.FindUserById(ID)

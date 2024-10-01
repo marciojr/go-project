@@ -7,7 +7,15 @@ import (
 	"github.com/marciojr/go-project/src/view"
 )
 
-func (uc *userControllerInterface) FindAllUsers(c *gin.Context) {}
+func (uc *userControllerInterface) FindAllUsers(c *gin.Context) {
+
+	domainListResult, err := uc.service.FindAllUsers()
+	if err != nil {
+		c.JSON(err.Code, err)
+	}
+
+	c.JSON(http.StatusOK, view.ConvertDomainListToResponse(domainListResult))
+}
 
 func (uc *userControllerInterface) FindUserById(c *gin.Context) {
 

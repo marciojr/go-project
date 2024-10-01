@@ -13,6 +13,31 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
+func (ur *userRepository) FindAllUsers() ([]model.UserDomainInterface, *rest_err.RestErr) {
+
+	collection_name := os.Getenv(MONGODB_COLLECTION)
+	collection := ur.databaseConnection.Collection(collection_name)
+
+	usersEntity := []model.UserDomainInterface{}
+
+	cursor, err := collection.Find(context.Background(), bson.D{})
+	println("Errrrrorrrr", err)
+	if err != nil {
+		return nil, rest_err.NewInternalServerError(err.Error())
+	}
+	defer cursor.Close(context.Background())
+
+	for cursor.Next(context.Background()) {
+		entity := entity.UserEntity{}
+		if err := cursor.Decode(&entity); err != nil {
+			println("error to decode user", err)
+		}
+		usersEntity = append(usersEntity, converter.ConvertEntityToDomain(entity))
+	}
+	println("Errrrrorrrr")
+	return usersEntity, nil
+}
+
 func (ur *userRepository) FindUserById(
 	ID string,
 ) (model.UserDomainInterface, *rest_err.RestErr) {
