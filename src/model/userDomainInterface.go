@@ -11,6 +11,7 @@ type UserDomainInterface interface {
 
 	GetJSONValue() (string, error)
 	EncryptPassword()
+	ComparePassword(string) bool
 }
 
 func NewUserDomain(email, password, name string,
