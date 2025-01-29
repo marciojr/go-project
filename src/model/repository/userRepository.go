@@ -26,6 +26,7 @@ type UserRepository interface {
 		ID string,
 	) (model.UserDomainInterface, *rest_err.RestErr)
 	DeleteUser(string) *rest_err.RestErr
+	UpdateUser(string, model.UserDomainInterface) *rest_err.RestErr
 }
 
 func NewUserRepository(

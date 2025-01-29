@@ -6,5 +6,16 @@ import (
 )
 
 func (ud *userDomainService) UpdateUser(ID string, userDomain model.UserDomainInterface) *rest_err.RestErr {
-	return nil
+
+	user, err := ud.FindUserById(ID)
+
+	if user == nil {
+		return rest_err.NewBadRequestError("There is no user with this ID")
+	}
+
+	if err != nil {
+		return err
+	}
+
+	return ud.userRepository.UpdateUser(ID, userDomain)
 }
