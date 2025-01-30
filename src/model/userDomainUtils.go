@@ -20,10 +20,3 @@ func (ud *userDomain) GetJSONValue() (string, error) {
 	}
 	return string(json), nil
 }
-
-func (ud *userDomain) ComparePassword(password string) bool {
-	hash := md5.New()
-	defer hash.Reset()
-	hash.Write([]byte(password))
-	return hex.EncodeToString(hash.Sum(nil)) == ud.password
-}

@@ -7,18 +7,9 @@ import (
 
 func (ud *userDomainService) LoginUser(email string, password string) (model.UserDomainInterface, *rest_err.RestErr) {
 
-	user, err := ud.userRepository.FindUserByEmail(email)
-
-	if user == nil {
-		return nil, rest_err.NewForbiddenError("Your email or password is incorrect")
-	}
-
+	user, err := ud.userRepository.FindUserByEmailAndPassword(email, password)
 	if err != nil {
 		return nil, err
-	}
-
-	if !user.ComparePassword(password) {
-		return nil, rest_err.NewForbiddenError("Your email or password is incorrect")
 	}
 
 	return user, nil
